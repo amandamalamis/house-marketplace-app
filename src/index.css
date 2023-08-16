@@ -218,7 +218,7 @@ button {
   text-align: right;
 }
 
-.signInBar,
+.logInBar,
 .signUpBar {
   margin-top: 3rem;
   display: flex;
@@ -227,26 +227,26 @@ button {
   position: inherit;
 }
 
-.signInButton,
+.logInButton,
 .signUpButton,
-.signInText,
+.logInText,
 .signUpText {
   cursor: pointer;
 }
 @media (min-width: 1024px) {
-  .signInBar,
+  .logInBar,
   .signUpBar {
     justify-content: start;
   }
 }
 
-.signInText,
+.logInText,
 .signUpText {
   font-size: 1.5rem;
   font-weight: 700;
 }
 
-.signInButton,
+.logInButton,
 .signUpButton {
   display: flex;
   justify-content: center;
@@ -257,7 +257,7 @@ button {
   border-radius: 50%;
 }
 @media (min-width: 1024px) {
-  .signInButton,
+  .logInButton,
   .signUpButton {
     margin-left: 3rem;
   }
