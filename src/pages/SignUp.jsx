@@ -6,6 +6,7 @@ import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
+import OAuth from '../components/OAuth'
 
 function SignUp() {
     const [showPassword, setShowPassword] = useState(false)
@@ -68,6 +69,14 @@ function SignUp() {
                         value={fullname}
                         onChange={onChange}
                     />
+                    <input
+                        type='email'
+                        className='emailInput'
+                        placeholder='Email'
+                        id='email'
+                        value={email}
+                        onChange={onChange}
+                    />
                     <div className="passwordInputDiv">
                         <input
                             type={showPassword ? 'text' : 'password'}
@@ -99,9 +108,9 @@ function SignUp() {
                         </button>
                     </div>
                 </form>
-
+                <OAuth></OAuth>
                 <Link to='/login' className='registerLink'>
-                    Login
+                    Login Instead
                 </Link>
 
 
