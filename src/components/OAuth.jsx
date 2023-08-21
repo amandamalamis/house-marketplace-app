@@ -24,7 +24,7 @@ function OAuth() {
 
             if (!docSnap.exists()) {
                 //if doesn't exist then create in DB 
-                await setDoc(doc, (db, 'users', user.uid), {
+                await setDoc(doc(db, 'users', user.uid), {
                     fullName: user.displayName,
                     email: user.email,
                     timestamp: serverTimestamp()
@@ -40,13 +40,14 @@ function OAuth() {
 
 
     return (
-        <div className="socialLogIn">
+        <div className="socialLogin">
             <p>
-                Sign {location.pathname === '/signup' ? 'UP' : 'IN '}</p>
+                Sign {location.pathname === '/signup' ? 'UP' : 'IN '} with </p>
             <button className="socialIconDiv" onClick={onGoogleClick}>
-                <img class="socialIconImg" src={googleIcon} alt="google icon" />
+                <img className="socialIconImg" src={googleIcon} alt="google icon" />
             </button>
-            OAuth</div>
+
+        </div>
     )
 }
 

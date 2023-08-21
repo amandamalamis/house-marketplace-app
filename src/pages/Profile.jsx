@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { getAuth, updateProfile } from 'firebase/auth'
 import { updateDoc, doc } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { useNavigate, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg'
+import homeIcon from '../assets/svg/homeIcon.svg'
+
+
 
 function Profile() {
 
@@ -22,7 +26,7 @@ function Profile() {
         auth.signOut()
         navigate('/')
     }
-
+    let listings = []
     const onSubmit = async () => {
         try {
             if (auth.currentUser.displayName !== fullName) {
@@ -49,6 +53,17 @@ function Profile() {
             [e.target.id]: e.target.value
         }))
     }
+
+    // const onDelete = async (listingId) => {
+    //     if (window.confirm('Are you sure you want to delete?')) {
+    //         await deleteDoc(doc(db, 'listings', listingId))
+    //         const updatedListings = listings.filter(
+    //             (listing) => listing.id !== listingId
+    //         )
+    //         setListings(updatedListings)
+    //         toast.success('Successfully deleted listing')
+    //     }
+    // }
 
     return <div className="profile">
         <header className="profileHeader">
@@ -86,6 +101,13 @@ function Profile() {
                         type="text" />
                 </form>
             </div>
+            <Link to='/createlisting' className='createListing'>
+                <img src={homeIcon} alt="home icon" />
+                <p>
+                    Sell or rent your home
+                </p>
+                <img src={arrowRight} alt="arrow" />
+            </Link>
         </main>
     </div>
 
