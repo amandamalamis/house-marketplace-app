@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
 import { ReactComponent as DeleteIcon } from '../assets/svg/deleteIcon.svg'
+import { ReactComponent as EditIcon } from '../assets/svg/editIcon.svg'
+
 import bedIcon from '../assets/svg/bedIcon.svg'
 import bathtubIcon from '../assets/svg/bathtubIcon.svg'
 
-
-function ListingItem({ listing, id, onDelete }) {
+//add the following props-listing, id, onedit, ondelete
+function ListingItem({ listing, id, onEdit, onDelete }) {
     return (
         <>
             <li className="categoryListing">
@@ -53,6 +55,10 @@ function ListingItem({ listing, id, onDelete }) {
                 {onDelete && (
                     <DeleteIcon className='removeIcon' fill='rbg(231, 76, 60)' onClick={() => onDelete(listing.id, listing.name)}>
                     </DeleteIcon>
+                )}
+                {onEdit && (
+                    <EditIcon className='editIcon' fill='rbg(231, 76, 60)' onClick={() => onEdit(id)}>
+                    </EditIcon>
                 )}
 
             </li>
