@@ -27,15 +27,32 @@ function CreateListing() {
         latitude: 0,
         longitude: 0
     })
+
     const { type, name, bedrooms, bathrooms, parking, furnished, address, offer, regularPrice, discountedPrice, images, latitude, longitude } = formData
     const auth = getAuth()
     const navigate = useNavigate()
     const isMounted = useRef(true)
 
+    useEffect(() => {
+        if (isMounted) {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    setFormData({ ...formData, userRef: user.uid })
+                }
+                else {
+                    navigate('/login')
+                }
+            })
+        }
+        return () => {
+            isMounted.current = false
+        }
+    }, [isMounted])
 
     const onSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
+
         if (discountedPrice >= regularPrice) {
             setLoading(false)
             toast.error("Discounted price must be less than regular price.")
@@ -45,10 +62,10 @@ function CreateListing() {
             setLoading(false)
             toast.error('Maximum of 6 images allowed.')
             return
-
         }
         let geolocation = {}
         let location
+
         if (geolocationEnabled) {
             const response = await fetch(
                 `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
@@ -69,13 +86,10 @@ function CreateListing() {
                 return
             }
         }
-
-
         else {
             geolocation.lat = latitude
             geolocation.lng = longitude
         }
-
 
         //store image in firebase
         const storeImage = async (image) => {
@@ -132,11 +146,11 @@ function CreateListing() {
             geolocation,
             timestamp: serverTimestamp()
         }
+        formDataCopy.location = address
 
         delete formDataCopy.images
         delete formDataCopy.address
 
-        formDataCopy.location = address
         //if no offer then delete discounted price
 
         !formDataCopy.offer && delete formDataCopy.discountedPrice
@@ -175,25 +189,9 @@ function CreateListing() {
 
     }
 
-    useEffect(() => {
-        if (isMounted) {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    setFormData({ ...formData, userRef: user.uid })
-                }
-                else {
-                    navigate('/login')
-                }
-            })
-        }
-        return () => {
-            isMounted.current = false
-        }
-    }, [isMounted])
     if (loading) {
         return <Spinner />
     }
-
 
 
     return (

@@ -47,9 +47,9 @@ function Category() {
             catch (error) {
                 toast.error("Could not fetch listings. ")
             }
-
-            fetchListings()
         }
+        fetchListings()
+
     }, [params.categoryName])
 
     //pagination function
@@ -65,7 +65,6 @@ function Category() {
                     startAfter(lastFetchedListing),
                     limit(10)
                 )
-
 
             //execute query
             //get docs for that specific query
@@ -88,9 +87,9 @@ function Category() {
         catch (error) {
             toast.error("Could not fetch listings. ")
         }
-
-        onFetchMoreListings()
     }
+
+
     return (<div className="category">
         <header>
             <p className="pageHeader">
@@ -116,7 +115,6 @@ function Category() {
                 </>) : (<p>No listings for {params.categoryName} </p>)}
     </div>
     )
-
 }
 
 

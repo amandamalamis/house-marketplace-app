@@ -24,8 +24,9 @@ function Contact() {
                 toast.error("Could not get landlord data. Please try again.")
             }
         }
-
+        getLandlordId()
     }, [params.landlordId])
+
     const onChange = e => setMessage(e.target.value)
 
     return (
@@ -42,17 +43,15 @@ function Contact() {
                             Contact {landlord?.name}
                         </p>
                     </div>
-                    <form lassName="messageForm">
+                    <form className="messageForm">
                         <div className="messageDiv">
                             <label htmlFor="message" className="messageLabel">Message</label>
-                            <textarea name="message" id="message" className='textarea' value={message} onChange={onChange} ></textarea>
+                            <textarea name="message" id="message" className='textarea' value={message} onChange={onChange}></textarea>
                         </div>
                         <a href={`mailto:${landlord.email}?Subject=${searchParams.get('listingName')}&body=${message}`}>
                             <button type="button" className="primaryButton">Send Message</button>
                         </a>
                     </form>
-
-
                 </main>
             )}
         </div>
