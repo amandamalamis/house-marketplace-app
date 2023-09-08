@@ -3,9 +3,9 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import OAuth from '../components/OAuth'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
-import OAuth from '../components/OAuth'
 
 function LogIn() {
     const [showPassword, setShowPassword] = useState(false)
@@ -35,7 +35,6 @@ function LogIn() {
                 navigate('/')
             }
         }
-
         catch (error) {
             toast.error('User credential error')
         }
@@ -73,18 +72,11 @@ function LogIn() {
                             className='showPassword'
                             onClick={() => setShowPassword((prevState) => !prevState)}>
 
-                        </img>
-                        <Link to='/forgotpassword'
-                            className='forgotPasswordLink'>
-                            Forgot Password
-                        </Link>
-                    </div>
-
-
-                </form>
-                <OAuth></OAuth>
-                <Link to='/signup' className='registerLink'>
-                    Sign Up
+                        </img></div>
+                    <Link to='/forgotpassword'
+                        className='forgotPasswordLink'>
+                        Forgot Password
+                    </Link>
                     <div className="logInBar">
                         <p className="logInText">
                             Sign In
@@ -93,6 +85,13 @@ function LogIn() {
                             <ArrowRightIcon fill="white" width='34px' height='34px' />
                         </button>
                     </div>
+                </form>
+
+                <OAuth />
+
+                <Link to='/signup' className='registerLink'>
+                    Sign Up
+
                 </Link>
 
 
