@@ -4,9 +4,9 @@ import { toast } from 'react-toastify'
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.config'
+import OAuth from '../components/OAuth'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
-import OAuth from '../components/OAuth'
 
 function SignUp() {
     const [showPassword, setShowPassword] = useState(false)
@@ -15,7 +15,6 @@ function SignUp() {
         email: '',
         password: '',
     })
-
 
     const { fullname, email, password } = formData
     const navigate = useNavigate()
@@ -34,15 +33,16 @@ function SignUp() {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password)
             const user = userCredential.user
 
-            updateProfile(auth.currentUser,
+                updateProfile(auth.currentUser,
                 {
                     displayName: fullname
                 })
+
             const formDataCopy = { ...formData }
 
             //delete password so not in db
             delete formDataCopy.password
-            formDataCopy.timeestamp = serverTimestamp()
+            formDataCopy.timestamp = serverTimestamp()
 
             //returns promise from async
             await setDoc(doc(db, 'users', user.uid), formDataCopy)

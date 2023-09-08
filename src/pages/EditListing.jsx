@@ -33,7 +33,6 @@ function EditListing() {
     const params = useParams()
     const isMounted = useRef(true)
 
-
     const onSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
@@ -46,8 +45,8 @@ function EditListing() {
             setLoading(false)
             toast.error('Maximum of 6 images allowed.')
             return
-
         }
+
         let geolocation = {}
         let location
         if (geolocationEnabled) {
@@ -74,7 +73,6 @@ function EditListing() {
             geolocation.lat = latitude
             geolocation.lng = longitude
         }
-
 
         //store image in firebase
         const storeImage = async (image) => {
@@ -134,13 +132,11 @@ function EditListing() {
             timestamp: serverTimestamp()
         }
 
-
         formDataCopy.location = address
         delete formDataCopy.images
         delete formDataCopy.address
         //if no offer then delete discounted price
         !formDataCopy.offer && delete formDataCopy.discountedPrice
-
 
         // update listing
         const docRef = doc(db, 'listings', params.listingId)

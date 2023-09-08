@@ -49,9 +49,7 @@ function Navbar() {
                         <p className={pathMatchRoute('/profile')
                             ? 'navbarListItemNameActive'
                             : 'navbarListItemName'
-                        }>
-                            Person</p>
-
+                        }>Profile</p>
                     </li>
                 </ul>
             </nav>

@@ -35,7 +35,6 @@ function OAuth() {
         catch (error) {
             toast.error("Could not authorize with Google.")
         }
-
     }
 
 
@@ -46,7 +45,6 @@ function OAuth() {
             <button className="socialIconDiv" onClick={onGoogleClick}>
                 <img className="socialIconImg" src={googleIcon} alt="google icon" />
             </button>
-
         </div>
     )
 }

@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore'
 import { db } from '../firebase.config'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -12,8 +11,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/a11y';
 
-
 import Spinner from './Spinner'
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
 
 function Slider() {
@@ -42,7 +41,6 @@ function Slider() {
 
         }
         fetchListings()
-
     }, [])
 
     if (loading) {
@@ -53,7 +51,6 @@ function Slider() {
     }
     return (listings && (
         <>
-
             <p className="exploreHeading">
                 Recommended</p>
             <Swiper slidesPerView={1} pagination={{ clickable: true }}  >
@@ -65,17 +62,15 @@ function Slider() {
                                     {data.name}
                                 </p>
                                 <p className="swiperSlidePrice">
-                                    ${data.discountedPrice ?? data.regularPrice}
+                                    ${data.discountedPrice ?? data.regularPrice} {' '}
                                     {data.type === 'rent' && ' / month'}
                                 </p>
                             </div>
-
                         </SwiperSlide>
                     ))}
             </Swiper>
         </>
-    )
-    )
+    ))
 }
 
 export default Slider

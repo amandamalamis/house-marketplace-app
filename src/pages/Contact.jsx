@@ -27,7 +27,7 @@ function Contact() {
         getLandlordId()
     }, [params.landlordId])
 
-    const onChange = e => setMessage(e.target.value)
+    const onChange = (e) => setMessage(e.target.value)
 
     return (
         <div className='pageContainer'>

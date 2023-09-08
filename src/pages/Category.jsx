@@ -25,7 +25,6 @@ function Category() {
                         limit(10)
                     )
 
-
                 //execute query
                 //get docs for that specific query
                 const querySnap = await getDocs(q)
@@ -42,14 +41,12 @@ function Category() {
 
                 setListings(listings)
                 setLoading(false)
-
             }
             catch (error) {
                 toast.error("Could not fetch listings. ")
             }
         }
         fetchListings()
-
     }, [params.categoryName])
 
     //pagination function
@@ -58,13 +55,13 @@ function Category() {
             //get a reference
 
             const listingsRef = collection(db, 'listings')
-            const q =
-                query(listingsRef,
-                    where('type', '==', params.categoryName),
-                    orderBy('timestamp', 'desc'),
-                    startAfter(lastFetchedListing),
-                    limit(10)
-                )
+            const q = query(
+                listingsRef,
+                where('type', '==', params.categoryName),
+                orderBy('timestamp', 'desc'),
+                startAfter(lastFetchedListing),
+                limit(10)
+            )
 
             //execute query
             //get docs for that specific query
@@ -82,13 +79,11 @@ function Category() {
 
             setListings((prevState) => [...prevState, ...listings])
             setLoading(false)
-
         }
         catch (error) {
             toast.error("Could not fetch listings. ")
         }
     }
-
 
     return (<div className="category">
         <header>
@@ -112,11 +107,11 @@ function Category() {
                             Load More
                         </p>
                     )}
-                </>) : (<p>No listings for {params.categoryName} </p>)}
+                </>) : (<p>No listings for {params.categoryName} </p>
+            )}
     </div>
     )
 }
-
 
 export default Category
 
