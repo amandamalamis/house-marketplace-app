@@ -8,9 +8,7 @@ import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg'
 import homeIcon from '../assets/svg/homeIcon.svg'
 import ListingItem from '../components/ListingItem'
 
-
 function Profile() {
-
     const auth = getAuth()
     const [loading, setLoading] = useState(true)
     const [listings, setListings] = useState(null)
